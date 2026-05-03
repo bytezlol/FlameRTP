@@ -1,0 +1,40 @@
+name: FlameRTP
+version: 1.0.0
+main: de.flamesmp.FlameRTP
+api-version: '1.20'
+folia-supported: true
+authors: [ FlamesMP ]
+description: High-performance, fully async Random Teleport plugin with pre-cached locations.
+softdepend: [ Vault ]
+
+commands:
+  rtp:
+    description: Teleport to a random location.
+    usage: /rtp [world]
+    aliases: [ wild, randomtp ]
+  rtpadmin:
+    description: Admin operations for FlameRTP.
+    usage: /rtpadmin <clearcd|clearcache|force> ...
+  rtpreload:
+    description: Reload FlameRTP configuration.
+    usage: /rtpreload
+
+permissions:
+  flamertp.use:
+    description: Use /rtp.
+    default: true
+  flamertp.admin:
+    description: Use /rtpadmin and /rtpreload.
+    default: op
+  flamertp.cooldown.bypass:
+    description: Bypass /rtp cooldown.
+    default: op
+  flamertp.cost.bypass:
+    description: Bypass /rtp cost.
+    default: op
+  flamertp.bypass.move:
+    description: Don't cancel countdown when moving.
+    default: false
+  flamertp.bypass.damage:
+    description: Don't cancel countdown when damaged.
+    default: false

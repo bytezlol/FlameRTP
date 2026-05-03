@@ -1,0 +1,16 @@
+package de.flamesmp.enums;
+
+public enum FailReason {
+
+    NO_SAFE_LOCATION,
+    WORLD_DISABLED,
+    WORLD_NOT_FOUND,
+    ON_COOLDOWN,
+    INSUFFICIENT_FUNDS,
+    ALREADY_TELEPORTING,
+    PLAYER_MOVED,
+    PLAYER_DAMAGED,
+    PLAYER_OFFLINE,
+    NO_PERMISSION,
+    INTERNAL_ERROR
+}

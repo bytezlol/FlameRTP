@@ -1,0 +1,123 @@
+# ─────────────────────────────────────────
+#  FlameRTP - default configuration
+# ─────────────────────────────────────────
+
+default-world: world
+
+economy:
+  enabled: false
+  provider: vault # currently only vault is supported
+
+# Pre-cache pool fills safe locations in the background so /rtp is instant.
+precache:
+  enabled: true
+  interval-ticks: 100 # how often (in ticks) the precache task runs
+  batch-size: 2 # parallel finds per tick per world
+
+teleport:
+  cancel-on-move: true
+  cancel-on-damage: true
+
+# ─── Per-world profiles ────────────────────
+worlds:
+  world:
+    enabled: true
+    shape: SQUARE # SQUARE or CIRCLE
+    center:
+      x: 0
+      z: 0
+    radius:
+      min: 500
+      max: 5000
+    y:
+      min: 60
+      max: 200
+    cooldown-seconds: 60
+    countdown-seconds: 5
+    max-attempts: 25
+    cost: 0.0
+    nether-roof: false
+    cache:
+      enabled: true
+      target-size: 25 # how many safe locations to keep pre-cached
+    blacklisted-biomes:
+      - OCEAN
+      - DEEP_OCEAN
+      - COLD_OCEAN
+      - DEEP_COLD_OCEAN
+      - FROZEN_OCEAN
+      - DEEP_FROZEN_OCEAN
+      - LUKEWARM_OCEAN
+      - DEEP_LUKEWARM_OCEAN
+      - WARM_OCEAN
+      - RIVER
+      - FROZEN_RIVER
+    unsafe-blocks:
+      - LAVA
+      - WATER
+      - FIRE
+      - MAGMA_BLOCK
+      - CACTUS
+      - POWDER_SNOW
+    stand-on-blacklist: [ ]
+
+  world_nether:
+    enabled: true
+    shape: SQUARE
+    center: { x: 0, z: 0 }
+    radius: { min: 200, max: 2000 }
+    y: { min: 32, max: 120 }
+    cooldown-seconds: 120
+    countdown-seconds: 5
+    max-attempts: 30
+    cost: 0.0
+    nether-roof: false
+    cache:
+      enabled: true
+      target-size: 15
+    blacklisted-biomes: [ ]
+    unsafe-blocks: [ LAVA, FIRE, MAGMA_BLOCK ]
+    stand-on-blacklist: [ MAGMA_BLOCK ]
+
+  world_the_end:
+    enabled: false
+    shape: CIRCLE
+    center: { x: 0, z: 0 }
+    radius: { min: 1000, max: 5000 }
+    y: { min: 40, max: 100 }
+    cooldown-seconds: 300
+    countdown-seconds: 5
+    max-attempts: 20
+    cost: 0.0
+    nether-roof: false
+    cache:
+      enabled: true
+      target-size: 10
+    blacklisted-biomes: [ ]
+    unsafe-blocks: [ ]
+    stand-on-blacklist: [ ]
+
+# ─── Messages ───────────────────────────────
+# Supports MiniMessage + legacy (&a, §6) + custom <#RRGGBB> tags.
+# Placeholders: <time>, <cost>, <x>, <y>, <z>, <player>, <world>
+messages:
+  prefix: "<#FD9000><b>RTP</b> <dark_gray>» <reset>"
+  searching: "<white>Searching for a safe location..."
+  found: "<white>Found a safe spot, teleporting!"
+  no-safe-location: "<red>Could not find a safe location. Try again."
+  world-disabled: "<red>RTP is disabled in this world."
+  world-not-found: "<red>That world does not exist."
+  on-cooldown: "<red>You must wait <yellow><time> <red>before using RTP again."
+  insufficient-funds: "<red>You need <yellow>$<cost> <red>to use RTP."
+  withdrawn: "<gray>Withdrawn <yellow>$<cost> <gray>for RTP."
+  already-teleporting: "<red>You are already being teleported."
+  moved: "<red>Teleport cancelled — you moved."
+  damaged: "<red>Teleport cancelled — you took damage."
+  no-permission: "<red>You do not have permission for that."
+  internal-error: "<red>An internal error occurred. Try again."
+  countdown: "<white>Teleporting in <yellow><time><white>..."
+  teleported: "<white>You were teleported to <yellow><x>, <y>, <z><white>."
+  reload-success: "<white>Configuration has been reloaded."
+  admin-cooldown-cleared: "<white>Cooldown cleared for <yellow><player><white>."
+  admin-player-not-found: "<red>Player could not be found."
+  admin-cache-cleared: "<white>Cleared cached locations for <yellow><world><white>."
